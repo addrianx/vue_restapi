@@ -59,14 +59,18 @@ export default {
     }
   },
   methods:{
-    async createPost(){
+    async createPost(e){
       await PostService.insertPost(this.title, this.text, this.author);
       this.posts = await PostService.getPost();
             this.$swal("Post Telah ditambahkan!", {
         title: 'success!',
         text: 'Your posts has been added.',
         icon: 'success'
-      }); 
+      });
+      this.title = '';
+      this.text = '';
+      this.author = ''; 
+      e.preventDefault();
     },
     deletePost(id){
       this.$swal({
